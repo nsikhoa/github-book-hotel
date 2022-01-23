@@ -16,10 +16,11 @@
     min-width: 210px; 
 }
 
-.user-main-nav li {
-    margin-right: 100px;
+.user-main-nav > li {
+    /* margin-right: 100px; */
     
     /* text-align: right; */
+    right: 111px;
     position: relative;
 }
 
@@ -37,7 +38,8 @@
     text-decoration: none;
     line-height: 45px;
     padding: 0 25px;
-    display: inline-block;
+    display: block;
+    
 }
 
 .user-main-nav li:hover .sub-nav {

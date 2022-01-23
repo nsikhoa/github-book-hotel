@@ -25,6 +25,19 @@ export default class Home extends React.Component {
                 'Content-Type': 'application/json'
             }
         }
+        // Promise.all([
+        //     fetch(
+        //         'https://bookhotel-backend.herokuapp.com/api/nologin/locations'
+        //     ).then(res => res.json()),
+        //     fetch(
+        //         'https://bookhotel-backend.herokuapp.com/api/nologin/locations/2/hotels'
+        //     ).then(res2 => res2.json())
+        // ]).then(([result1, result2]) => {
+        //     locations = result1
+        //     hotels = result2
+        // }).catch(err => {
+        //     console.log(err);
+        // })
         fetch('https://bookhotel-backend.herokuapp.com/api/nologin/locations', requestOptions)
         .then(function(response) {
             return response.json()

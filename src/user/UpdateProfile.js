@@ -4,23 +4,20 @@ import { MetaTags } from 'react-meta-tags';
     
 export default function UpdateProfile() {
     const user = JSON.parse(localStorage.getItem('user-info'))
-    const [password, setPassword] = useState('')
-    const [password2, setPassword2] = useState('')
+    const token = user.token
+    // console.log(token);
 
-    const [name, setName] = useState('')
+    const [name, setName] = useState(user.name)
     // const [gender, setGender] = useState('')
-    const [email, setEmail] = useState('')
-    const [address, setAddress] = useState('')
-    const [identification, setIdentification] = useState('')
-    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState(user.email)
+    const [address, setAddress] = useState(user.address)
+    const [identification, setIdentification] = useState(user.identification)
+    const [phone, setPhone] = useState(user.phone)
     const navigate = useNavigate();
 
     async function update() {
-        if(name === "") setName(user.name)
-        if(email === "") setEmail(user.email)
-        if(address === "") setAddress(user.address)
-        if(identification === "") setIdentification(user.identification)
-        if(phone === "") setPhone(user.phone)
+        console.log(address);
+        
         let raw = {
             "name": name,
             "email": email,
@@ -28,7 +25,7 @@ export default function UpdateProfile() {
             "identification": identification,
             "phone": phone
         }
-        let auth = "Bearer " + user.token;
+        let auth = "Bearer " + token;
         let result = await fetch("https://bookhotel-backend.herokuapp.com/api/v1/user/" + user.id + "/update", {
             method: 'PUT',
             headers: {
@@ -38,9 +35,11 @@ export default function UpdateProfile() {
             },
             body: JSON.stringify(raw)
         })
+        console.log(result);
         result = await result.json();
         localStorage.setItem("user-info", JSON.stringify(result.data))
         alert('Cập nhật thành công')
+        hidden()
         navigate('/profile')
     }
 
@@ -58,41 +57,48 @@ export default function UpdateProfile() {
                 </div>
                 <div>
                     <label className='register-label'>Họ và tên</label>
-                    <input type="text" name="" placeholder="Họ và tên" defaultValue={user.name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" name="" placeholder="Họ và tên" defaultValue={user.name} onChange={(e) => {
+                        
+                            setName(e.target.value)
+                    }}/>
                 </div>
                 <div>
                     <label className='register-label'>Số điện thoại</label>
-                    <input type="text" name="" placeholder="Số điện thoại" defaultValue={user.phone} onChange={(e) => setPhone(e.target.value)}/>
+                    <input type="text" name="" placeholder="Số điện thoại" defaultValue={user.phone} onChange={(e) => {
+                        
+                            setPhone(e.target.value)
+                    }}/>
                 </div>
                 <div>
                     <label className='register-label'>Địa chỉ</label>
-                    <input type="text" name="" placeholder="Địa chỉ" defaultValue={user.address} onChange={(e) => setAddress(e.target.value)}/>
+                    <input type="text" name="" placeholder="Địa chỉ" defaultValue={user.address} onChange={(e) => {
+                        
+                            setAddress(e.target.value)
+                    }}/>
                 </div>
                 <div>
                     <label className='register-label'>Email</label>
-                    <input type="email" name="" placeholder="Email" defaultValue={user.email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" name="" placeholder="Email" defaultValue={user.email} onChange={(e) => {
+                        
+                            setEmail(e.target.value)
+                    }}/>
                 </div>
                 <div>
                     <label className='register-label'>CMND/CCCD</label>
-                    <input type="text" name="" placeholder="CMND/CCCD" defaultValue={user.identification} onChange={(e) => setIdentification(e.target.value)}/>
+                    <input type="text" name="" placeholder="CMND/CCCD" defaultValue={user.identification} onChange={(e) => {
+                        
+                            setIdentification(e.target.value)
+                    }}/>
                 </div>
-                <div>
-                    <label className='register-label'>Mật khẩu</label>
-                    <input type="password" name="" placeholder="Mật khẩu" onChange={(event) => {
-                        setPassword(event.target.value)
-                    }} />
-                </div>
-                <div>
-                    <label className='register-label'>Nhập lại mật khẩu</label>
-                    <input type="password" name="" placeholder="Nhập lại mật khẩu" onChange={(event) => {
-                        setPassword2(event.target.value)
-                    }} />
-                </div>
-                {password !== password2 && <p className='inform-pass'>Mật khẩu không khớp</p>}
-                <button onClick={update} className='btn-signup' type='button'>Cập nhật</button>
+                <p style={{fontSize: '13px'}}>*Mỗi lần đăng nhập chỉ được cập nhật thông tin một lần</p>
+                
+                <button onClick={update} className='btn-signup js-btn-save' type='button'>Lưu</button>
             </form>
             
         </div>
     )
 }
     
+function hidden() {
+    document.querySelector('.js-btn-save').classList.add('hidden-loading')
+}

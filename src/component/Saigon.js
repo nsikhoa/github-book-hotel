@@ -122,8 +122,6 @@ function Images(props) {
 
 class Hotels extends React.Component {
     render() {
-        let url = 'dananghotel' + this.props.data.id
-        console.log(url);
         return (
             <div className='row'>
                {this.props.data.map(item => {
