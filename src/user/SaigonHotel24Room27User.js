@@ -1,6 +1,6 @@
 import React from "react";
 import { MetaTags } from "react-meta-tags";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Location, useLocation } from "react-router-dom";
 import '../NovotelRoom.css'
 
@@ -13,6 +13,10 @@ import '../NovotelRoom.css'
 
 // getURL()
 
+let arrival_date = ''
+let departure_date = ''
+let number_of_people = ''
+
 export default class SaigonHotel24Room27User extends React.Component{
     
     constructor(props) {
@@ -24,8 +28,47 @@ export default class SaigonHotel24Room27User extends React.Component{
         }
     }
     
+    getInfo = () => {
+        const user = JSON.parse(localStorage.getItem('user-info'))
+        return user
+    }
+    
     componentDidMount() {
         this.loadCategory()
+    }
+
+    static bookRoom = () => { 
+        const user = JSON.parse(localStorage.getItem('user-info'))
+        const room_id = JSON.parse(localStorage.getItem('room-id'))
+        let auth = "Bearer " + user.token;
+        number_of_people = parseInt(number_of_people);
+        let raw = {
+            "name": user.name,
+            "phone": user.phone,
+            "email": user.email,
+            "identification": user.identification,
+            "arrival_date": arrival_date,
+            "departure_date": departure_date,
+            "number_of_people": number_of_people,
+            "user_id": user.id,
+            "room_id": room_id
+        }
+        console.log(raw);
+        fetch(`https://bookhotel-backend.herokuapp.com/api/v1/user/${user.id}/order/${room_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                "Authorization": auth
+            },
+            body: JSON.stringify(raw)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+            alert('Đặt phòng thành công!')
+        })
+        .catch(err => console.log(err))
     }
 
     loadCategory = () => {
@@ -49,10 +92,6 @@ export default class SaigonHotel24Room27User extends React.Component{
         })
     }
 
-    getInfo = () => {
-        const user = JSON.parse(localStorage.getItem('user-info'))
-        return user
-    }
 
     render() {
         return (
@@ -207,17 +246,41 @@ class ModalBook extends React.Component {
                         </label>
                         <input id="id-number" type="text" className="modal-input" placeholder="CMND/CCCD" value={this.user.identification}/>
 
+                        <label htmlFor="number" className="modal-label">
+                            Số người
+                        </label>
+                        <input id="number" type="number" className="modal-input" defaultValue='0' onChange={(e) => {
+                            number_of_people = e.target.value;
+                            console.log(number_of_people);
+                        }}/>
+
                         <label htmlFor="date-arrive" className="modal-label">
                             Ngày đến
                         </label>
-                        <input id="date-arrive" type="date" className="modal-input" />
+                        <input id="date-arrive" type="date" className="modal-input js-date-arrive" onChange={(e) => {
+                            // this.setState({arrival_date: e.target.value})
+                            let date_arrive = e.target.value
+                            let [year, month, date] = date_arrive.split('-');
+                            date_arrive = date + '/' + month + '/' + year;
+                            // this.setState({arrival_date: date_arrive})
+                            arrival_date = date_arrive
+                            console.log(date_arrive);  
+                        }}/>
 
                         <label htmlFor="date-leave" className="modal-label">
                             Ngày đi
                         </label>
-                        <input id="date-leave" type="date" className="modal-input" />
+                        <input id="date-leave" type="date" className="modal-input js-date-leave" onChange={(e) => {
+                            // this.setState({arrival_date: e.target.value})
+                            let date_leave = e.target.value
+                            let [year, month, date] = date_leave.split('-');
+                            date_leave = date + '/' + month + '/' + year;
+                            departure_date = date_leave
+                            // this.setState({departure_date: date_leave})
+                            console.log(date_leave);  
+                        }} />
 
-                        <button id="book-room">Đặt phòng</button>
+                        <button onClick={SaigonHotel24Room27User.bookRoom} id="book-room">Đặt phòng</button>
                     </div>
                 </div>
             </div>

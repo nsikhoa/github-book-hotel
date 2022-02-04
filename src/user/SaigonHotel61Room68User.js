@@ -17,7 +17,7 @@ let arrival_date = ''
 let departure_date = ''
 let number_of_people = ''
 
-export default class SaigonHotel39Room40 extends React.Component{
+export default class SaigonHotel61Room68User extends React.Component{
     
     constructor(props) {
         super(props)
@@ -41,6 +41,7 @@ export default class SaigonHotel39Room40 extends React.Component{
         const user = JSON.parse(localStorage.getItem('user-info'))
         const room_id = JSON.parse(localStorage.getItem('room-id'))
         let auth = "Bearer " + user.token;
+        number_of_people = parseInt(number_of_people);
         let raw = {
             "name": user.name,
             "phone": user.phone,
@@ -48,12 +49,11 @@ export default class SaigonHotel39Room40 extends React.Component{
             "identification": user.identification,
             "arrival_date": arrival_date,
             "departure_date": departure_date,
-            "number_of_people": +number_of_people,
+            "number_of_people": number_of_people,
             "user_id": user.id,
             "room_id": room_id
         }
         console.log(raw);
-        console.log(auth);
         fetch(`https://bookhotel-backend.herokuapp.com/api/v1/user/${user.id}/order/${room_id}`, {
             method: 'POST',
             headers: {
@@ -66,7 +66,7 @@ export default class SaigonHotel39Room40 extends React.Component{
         .then(response => response.json())
         .then(result => {
             console.log(result)
-            alert('Đặt phòng thành công')
+            alert('Đặt phòng thành công!')
         })
         .catch(err => console.log(err))
     }
@@ -84,7 +84,7 @@ export default class SaigonHotel39Room40 extends React.Component{
             return response.json()
         })
         .then((hotels) => {
-            this.setState({response: hotels[1].rooms[0], roomImages: hotels[1].rooms[0].roomImages, lastImage: hotels[1].rooms[0].roomImages[4].image})
+            this.setState({response: hotels[2].rooms[1], roomImages: hotels[2].rooms[1].roomImages, lastImage: hotels[2].rooms[1].roomImages[4].image})
             console.log(this.state.lastImage);
         })
         .catch(function(err) {
@@ -100,7 +100,7 @@ export default class SaigonHotel39Room40 extends React.Component{
                     <title>{this.state.response.hotel_name}</title>
                 </MetaTags>
                 <header className="DanangNovotel-header">
-                    <Link to="/user/saigon/saigonhotel39" style={{color: 'white'}} className='loginform-back'>&larr;</Link>
+                    <Link to="/user/saigon/saigonhotel61" style={{color: 'white'}} className='loginform-back'>&larr;</Link>
                     {/* <img className='logo' src='./img/logo.png' /> */}
                     <nav className='nav-link'>
                         <ul className='user-main-nav'>
@@ -280,7 +280,7 @@ class ModalBook extends React.Component {
                             console.log(date_leave);  
                         }} />
 
-                        <button onClick={SaigonHotel39Room40.bookRoom} id="book-room">Đặt phòng</button>
+                        <button onClick={SaigonHotel61Room68User.bookRoom} id="book-room">Đặt phòng</button>
                     </div>
                 </div>
             </div>

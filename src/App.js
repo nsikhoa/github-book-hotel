@@ -46,6 +46,9 @@ import SaigonHotel24Room33User from './user/SaigonHotel24Room33User';
 import SaigonHotel39User from './user/SaigonHotel39User';
 import SaigonHotel39Room40User from './user/SaigonHotel39Room40User';
 import SaigonHotel39Room41User from './user/SaigonHotel39Room41User';
+import SaigonHotel61User from './user/SaigonHotel61User';
+import SaigonHotel61Room62User from './user/SaigonHotel61Room62User';
+import SaigonHotel61Room68User from './user/SaigonHotel61Room68User';
 
 function App() {
 
@@ -93,11 +96,15 @@ function App() {
 
         <Route path='/user/saigon' element={<SaigonUser />} />
         <Route path='/user/saigon/saigonhotel24' element={<SaigonHotel24User />} />
-        <Route path='/user/saigon/saigonhotel24/room27' element={<SaigonHotel24Room27User />} />
-        <Route path='/user/saigon/saigonhotel24/room33' element={<SaigonHotel24Room33User />} />
+        <Route path='/user/saigon/saigonhotel24/room/27' element={<SaigonHotel24Room27User />} />
+        <Route path='/user/saigon/saigonhotel24/room/33' element={<SaigonHotel24Room33User />} />
         <Route path='/user/saigon/saigonhotel39' element={<SaigonHotel39User />} />
-        <Route path='/user/saigon/saigonhotel39/room40' element={<SaigonHotel39Room40User />} />
-        <Route path='/user/saigon/saigonhotel39/room41' element={<SaigonHotel39Room41User />} />
+        <Route path='/user/saigon/saigonhotel39/room/40' element={<SaigonHotel39Room40User />} />
+        <Route path='/user/saigon/saigonhotel39/room/41' element={<SaigonHotel39Room41User />} />
+        <Route path='/user/saigon/saigonhotel61' element={<SaigonHotel61User />} />
+        <Route path='/user/saigon/saigonhotel61/room/62' element={<SaigonHotel61Room62User />} />
+        <Route path='/user/saigon/saigonhotel61/room/68' element={<SaigonHotel61Room68User />} />
+
 
       </Routes>
     </div>

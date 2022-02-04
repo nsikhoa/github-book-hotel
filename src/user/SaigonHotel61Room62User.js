@@ -17,7 +17,7 @@ let arrival_date = ''
 let departure_date = ''
 let number_of_people = ''
 
-export default class SaigonHotel39Room40 extends React.Component{
+export default class SaigonHotel61Room62User extends React.Component{
     
     constructor(props) {
         super(props)
@@ -84,7 +84,7 @@ export default class SaigonHotel39Room40 extends React.Component{
             return response.json()
         })
         .then((hotels) => {
-            this.setState({response: hotels[1].rooms[0], roomImages: hotels[1].rooms[0].roomImages, lastImage: hotels[1].rooms[0].roomImages[4].image})
+            this.setState({response: hotels[2].rooms[0], roomImages: hotels[2].rooms[0].roomImages, lastImage: hotels[2].rooms[0].roomImages[4].image})
             console.log(this.state.lastImage);
         })
         .catch(function(err) {
@@ -100,7 +100,7 @@ export default class SaigonHotel39Room40 extends React.Component{
                     <title>{this.state.response.hotel_name}</title>
                 </MetaTags>
                 <header className="DanangNovotel-header">
-                    <Link to="/user/saigon/saigonhotel39" style={{color: 'white'}} className='loginform-back'>&larr;</Link>
+                    <Link to="/user/saigon/saigonhotel61" style={{color: 'white'}} className='loginform-back'>&larr;</Link>
                     {/* <img className='logo' src='./img/logo.png' /> */}
                     <nav className='nav-link'>
                         <ul className='user-main-nav'>
@@ -280,7 +280,7 @@ class ModalBook extends React.Component {
                             console.log(date_leave);  
                         }} />
 
-                        <button onClick={SaigonHotel39Room40.bookRoom} id="book-room">Đặt phòng</button>
+                        <button onClick={SaigonHotel61Room62User.bookRoom} id="book-room">Đặt phòng</button>
                     </div>
                 </div>
             </div>

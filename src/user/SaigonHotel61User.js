@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { MetaTags } from 'react-meta-tags'
 import { Location } from "react-router-dom";
 
-class SaigonHotel24User extends React.Component {
+class SaigonHotel61User extends React.Component {
     // let [,url,loc] = useLocation().pathname.split('/')
     // url = '/' + url
     
@@ -32,7 +32,7 @@ class SaigonHotel24User extends React.Component {
             return response.json()
         })
         .then((hotels) => {
-            this.setState({response: hotels[0].rooms,  name: hotels[0].hotel_name})
+            this.setState({response: hotels[2].rooms,  name: hotels[2].hotel_name})
             console.log(this.state.response);
         })
         .catch(function(err) {
@@ -66,9 +66,6 @@ class SaigonHotel24User extends React.Component {
                             </li>
                         </ul>
                     </nav>
-                    <div className="hero-text-box row">
-                        {/* <H1 /> */}
-                    </div>
                 </header>
                 <SectionRoom data={this.state.response} />
 
@@ -161,4 +158,4 @@ function SectionRoom(props) {
     )
 }
 
-export default SaigonHotel24User
+export default SaigonHotel61User

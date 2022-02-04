@@ -104,7 +104,7 @@ function SectionRoom(props) {
     return (
             <div>
                 {props.data.map((item) => {
-                    let url = url1 + '/room' + item.id
+                    let url = url1 + '/room/' + item.id
                     return (
                         <section className="room-container" key={item.id} >
                             <div className="row" style={{maxHeight: '320px', position: 'relative', top: '-80px'}}>
@@ -145,7 +145,9 @@ function SectionRoom(props) {
                                     <p>
                                         Giá tiền: {item.price}vnd
                                     </p>
-                                    <Link to={url} className="btn-show" >Xem phòng</Link>
+                                    <Link to={url} className="btn-show" onClick={() => {
+                                        localStorage.setItem('room-id', item.id);
+                                    }}>Xem phòng</Link>
                                 </div>
                             </div>
                         </section>
