@@ -48,7 +48,7 @@ export default class HomeUser extends React.Component {
         return (
             <div className='container'>
                 <MetaTags>
-                    <title>Trang chủ</title>
+                    <title>Chào mừng {this.getInfo().name}</title>
                 </MetaTags>
                 <header>
                     {/* <img className='logo' src='./img/logo.png' /> */}
