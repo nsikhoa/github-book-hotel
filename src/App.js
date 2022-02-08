@@ -3,6 +3,7 @@ import './App.css';
 import Home from './component/Home';
 import LoginFormTest from './component/LoginFormTest';
 import Register from './component/Register';
+import ChangePassword from './component/ChangePassword';
 import Danang from './component/Danang';
 import Hanoi from './component/Hanoi';
 import DanangNovotel from './component/DanangNovotel';
@@ -82,6 +83,7 @@ function App() {
         <Route path='/user' element={<HomeUser />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/update' element={<UpdateProfile />} />
+        <Route path='/changepass' element={<ChangePassword />} />
         <Route path='/history' element={<HistoryBookUser />} />
         <Route path='/user/hanoi' element={<HanoiUser />} />
         <Route path='/user/hanoi/userhotel7' element={<HanoiHotel7User />} />

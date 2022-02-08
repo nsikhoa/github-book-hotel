@@ -47,6 +47,7 @@ export default function Profile() {
                 </div>
                 
                 <button onClick={() => navigate('/update')} className='btn-signup' type='button'>Cập nhật</button>
+                <button style={{marginLeft: '10px'}} onClick={() => navigate('/changePass')} className='btn-signup' type='button'>Đổi mật khẩu</button>
                 
             </form>
             

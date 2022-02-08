@@ -38,9 +38,9 @@ export default function UpdateProfile() {
         console.log(result);
         result = await result.json();
         localStorage.setItem("user-info", JSON.stringify(result.data))
-        alert('Cập nhật thành công')
+        alert('Cập nhật thành công! Vui lòng đăng nhập lại')
         hidden()
-        navigate('/profile')
+        navigate('/')
     }
 
     return(
